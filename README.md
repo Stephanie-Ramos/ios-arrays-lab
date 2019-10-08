@@ -12,10 +12,12 @@ Then, using array subscripting and string interpolation, print out the String `"
 ```swift
 let colors = ["orange", "red", "yellow", "turquoise", "lavender"]
 ```
+
 answer: 
 ```swift
 print("\(colors[0]), \(colors[2]), \(colors[4]) are some of my favorite colors")
 ```
+
 ## Question 2
 
 Remove "Illinois" and "Kansas" from the array below.
@@ -38,7 +40,7 @@ Iterate through the array below. For each state, print out the name of the state
 answer: 
 ```swift
 for state in moreStates {
-    if state == moreStates[0]{
+    if state == moreStates[0] || state == moreStates[2]{
         print("\(state) is not in the contient of the United States")
     } else {
         print("\(state) is in the contient of the United States ")
@@ -51,10 +53,13 @@ for state in moreStates {
 Print out how many non-whitespace characters are in `myString`:
 
 `let myString = "This is good practice with Strings!"`
+
+answer: 
 ```swift 
 let formattedMyString = myString.replacingOccurrences(of: " ", with: "")
 print(formattedMyString.count)
 ```
+
 Iterate through the array below. For each sentence, print out how many non-whitespace characters are in it.
 
 `let myFavoriteQuotes = ["To be or not to be, that is the question.", "The only source of knowledge is experience.", "Mr. Gorbachev, tear down this wall!", "Four score and twenty years ago..."]`
@@ -76,6 +81,7 @@ Iterate through `garden` and place any 🌷 that you find into the `basket`. Rep
 var garden = ["dirt","🌷","dirt","🌷","dirt","dirt","🌷","dirt","🌷","dirt"]
 var basket = [String]()
 ```
+
 answer:
 ```swift
 var w = 0
@@ -105,8 +111,7 @@ answer:
 battingLineup.append("Suzuki")
 battingLineup[1] = "Tejada"
 battingLineup[5] = "Guerrero"
-battingLineup.remove(at: 0)
-battingLineup.append("Reyes")
+battingLineup.swapAt(0, 7)
 print(battingLineup)
 ```
 
@@ -141,17 +146,12 @@ target = 3
 
 //false
 ```
+
 answer:
 ```swift
-for number in numbers{
-    if number == target {
-        print("true") // this prints x times
-    } else {
-        print("false") // this prints x times
-    }
-}
+var contains = numbers.filter{$0 == target}
+print(contains)
 ```
-
 
 ## Question 8
 
@@ -162,11 +162,15 @@ let arrayOfNumbers: [Int] = (1...100).map{ _ in Int.random(in: 0...200)}.map{Int
 
 //This creates an array of 100 numbers in between 0 and 200. For now, you don't need to worry about how it does that.
 ```
+
 answer:
 ```swift
-
+var maxNumberArray:Int = 0
+for number in arrayOfNumbers where number >= maxNumberArray {
+maxNumberArray = number
+}
+print("The max number in the array is \(maxNumberArray)")
 ```
-
 
 ## Question 9
 
@@ -177,9 +181,14 @@ let arrayOfNumbers: [Int] = (1...100).map{ _ in Int.random(in: 0...200)}.map{Int
 
 //This creates an array of 100 numbers in between 0 and 200.  For now, you don't need to worry about how it does that.
 ```
+
 answer:
 ```swift
-
+var minNumberArray:Int = 200
+for number in arrayOfNumber where number <= minNumberArray {
+    minNumberArray = number
+}
+print("The min number in the array is \(minNumberArray)")
 ```
 
 ## Question 10
@@ -190,13 +199,11 @@ Iterate through `secondListOfNumbers`, and print out all the odd numbers.
 
 answer:
 ```swift
-var s = 0
+var secondListOfNumbers = [19,13,14,19,101,10000,141,404] //print out all the odd numbers
 for counter in 0...7 where secondListOfNumbers[counter] % 2 == 1{
-    s += secondListOfNumbers[counter]
-    print("The sum is \(s)") // this prints 4 times.
+    print(secondListOfNumbers[counter])
 }
 ```
-
 
 ## Question 11
 
@@ -219,10 +226,10 @@ Iterate through `thirdListOfNumbers`, and print out the sum of all the even numb
 answer:
 ```swift
 var sum = 0
-for counter in 0...9 where thirdListOfNumbers[counter] % 2 == 0{
-    sum += thirdListOfNumbers[counter]
-    print("The sum is \(sum)") // this prints 4 times 
+for counter in 0...9 where thirdListOfNumber[counter] % 2 == 0 {
+    sum += thirdListOfNumber[counter]
 }
+print("The sum is \(sum)")
 ```
 
 ## Question 13
@@ -234,6 +241,7 @@ var listOne = [28, 64, 7, 96, 13, 32, 94, 11, 80, 68]
 var listTwo = [18, 94, 48, 6, 42, 68, 79, 76, 13, 7]
 var sharedElements = [Int]()
 ```
+
 answer:
 ```swift
 sharedElements = listOne + listTwo
@@ -265,7 +273,8 @@ Find the second smallest number in an Array of Ints
 
 answer:
 ```swift
-
+let sorted = arrayOfNumbers.sorted()
+let secondSmallest = sorted[1]
 ```
 
 ## Question 3
@@ -277,10 +286,10 @@ Find the sum of all the multiples of 3 or 5 below 1000.
 answer:
 ```swift
 var n = 0
-for number in 0...100 where number % 3 == 0 || number % 5 == 0 {
+for number in 0...1000 where number % 3 == 0 || number % 5 == 0 {
     n += number
-    print(n) // this prints 48 times
 }
+print("The sum of all multiples of 3 and 5 below 1000 is \(n)")
 ```
 
 ## Question 4
@@ -296,7 +305,6 @@ answer:
 
 ```
 
-
 ## Question 5
 
 Identify if there are 3 integers that sum to 10 in the following array. If so, print them as a triplet. If there are multiple triplets, print all possible triplets.
@@ -305,7 +313,17 @@ Identify if there are 3 integers that sum to 10 in the following array. If so, p
 
 answer: 
 ```swift
-
+var triplets = [Array<Int>]()
+for x in tripleSumArr {
+    for y in tripleSumArr {
+        for z in tripleSumArr{
+            if x + y + z == 10 {
+                triplets.append([x, y, z])
+            }
+        }
+    }
+}
+print(Set(triplets)) 
 ```
 
 ## Question 6
@@ -318,6 +336,24 @@ output: `"abba"`
 
 answer: 
 ```swift
+var array = Array<String>()
+var counterTwo = 0
+var counterOne = 0
+var most = ""
+
+for word in array {
+    for char in word {
+        if char == "a" {
+            counterOne += 1
+        }
+    }
+    if counterOne > counterTwo {
+        most = word
+    }
+    counterTwo = counterOne
+    counterOne = 0
+}
+print(most)
 ```
 
 ## Question 7
@@ -330,7 +366,20 @@ Output: `[9,3]`
 
 answer: 
 ```swift
+var arrayOfInts = [[2,4,1],[3,0],[9,3]]
+var largest = 0
+var largestArray = [Int]()
+
+for array in arrayOfInts {
+    let sum = array.reduce(0, +)
+    if sum > largest {
+        largest = sum
+        largestArray = array
+    }
+}
+print(largestArray)
 ```
+
 ## Question 8
 
 Given an Array of Tuples of type `(Int, Int)`, create an array containing all the tuples where the first Int is equal to the second Int.
@@ -341,6 +390,14 @@ Output: `[(-3,-3), (1,1)]`
 
 answer:
 ```swift
+var arrayOfTuples = [(4,2), (-3,-3), (1,1), (3,9)]
+var repeatingTuples = [(Int, Int)]()
+for tuple in arrayOfTuples {
+    if tuple.0 == tuple.1{
+        repeatingTuples.append(tuple)
+    }
+}
+print (repeatingTuples)
 ```
 
 ## Question 9
@@ -353,6 +410,13 @@ Output: `false`
 
 answer: 
 ```swift
+var arrayOfBools = [true, false, true, true]
+var allAreTrue : Bool = true
+
+if arrayOfBools.contains(false) {
+    allAreTrue = false
+    
+}
 ```
 
 ## Question 10
@@ -364,8 +428,14 @@ Input: `[0..<3 , 2..<10, -4..<6, 13..<14]`
 Output: `[-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10,13]`
 
 answer: 
-
 ```swift
+var array = [Int]()
+var input = [0..<3 , 2..<10, -4..<6, 13..<14]
+for i in input {
+    for each in i {
+        array.append(each)
+    }
+}
 ```
 
 ## Question 11
@@ -378,6 +448,18 @@ Output: `"ApLeAuE"`
 
 answer: 
 ```swift
+let arr: [Character] = ["a", "p","P","l","E"," ","S","a","u","C","e"]
+var arrString = ""
+for index in 0..<arr.count {
+    if arr[index] != " " && String(arr[index]) == String(arr[index].lowercased()) {
+        if index % 2 != 1 {
+            arrString += String(arr[index]).uppercased()
+        } else {
+            arrString += String(arr[index])
+        }
+    }
+}
+print (arrString)
 ```
 
 ## Question 12
@@ -401,6 +483,13 @@ Print out the sum of the diagonals of `myMatrix`.
 
 answer: 
 ```swift
+var n = myMatrix.count
+var sum = 0
+for i in 0..<n {
+    sum += myMatrix[i][i]
+    sum += myMatrix[i][n - i - 1]
+}
+print("The sum of the diagonals \(sum)")
 ```
 
 ## Question 14
@@ -413,4 +502,13 @@ var matrixToRotate = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 answer: 
 ```swift
+var matrixResult = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+var n = matrixToRotate.count
+
+for i in 0..<n {
+    for j in 0..<n {
+        matrixResult[j][n - i - 1] = matrixToRotate[i][j]
+    }
+}
+print(matrixResult)
 ```
