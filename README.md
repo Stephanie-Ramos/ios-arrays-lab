@@ -302,7 +302,22 @@ var someRepeatsAgain = [25,11,30,31,50,28,4,37,13,20,24,38,28,14,44,33,7,43,39,3
 
 answer:
 ```swift 
-
+var repeatsAgain = [Int]()
+var a = 0
+for x in someRepeatsAgain {
+    for y in someRepeatsAgain {
+        if x == y {
+            a += 1
+        }
+        if a > 2 {
+            repeatsAgain.append(y)
+            break
+        }
+    }
+    a = 0
+}
+repeatsAgain = Array(Set(repeatsAgain))
+print(repeatsAgain.sorted())
 ```
 
 ## Question 5
